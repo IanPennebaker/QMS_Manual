@@ -1,4 +1,4 @@
-sFolder = "C:\Users\Ian Pennebaker\Desktop\Test2"
+sFolder = "C:\Users\Ian\Desktop\Test2"
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 	For Each oFile In oFSO.GetFolder(sFolder).Files
 	if (oFile.Name = "ECMWC.pdf") then

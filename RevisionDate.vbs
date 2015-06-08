@@ -1,11 +1,11 @@
-Set copyFSO = CreateObject("Scripting.FileSystemObject")
-	copyFSO.copyFile "C:\Users\Ian Pennebaker\Desktop\Test\QMS-Manual\*.pdf", "C:\Users\Ian Pennebaker\Desktop\Test2"
-	copyFSO.moveFile "C:\Users\Ian Pennebaker\Desktop\Test\QMS-Manual\*.pdf", "C:\Users\Ian Pennebaker\Desktop\Temp"
-'--------------------------------------------------EXCEL---------------------------------------------------------------
+Set copyFSO = CreateObject ("Scripting.FileSystemObject")
+	copyFSO.copyFile "C:\Users\Ian\Desktop\Test\*.pdf", "C:\Users\Ian\Desktop\Test2"
+	copyFSO.moveFile "C:\Users\Ian\Desktop\Test\*.pdf", "C:\Users\Ian\Desktop\Temp"
+'-----Excel------
 inputPrefix = cint(inputbox("Please enter two digit prefix for file you would like updated.","File Update"))
 Set objExcel = CreateObject("Excel.Application")
 objExcel.Visible = False
-sFolder = "C:\Users\Ian Pennebaker\Desktop\Test\QMS-Manual"
+sFolder = "C:\Users\Ian\Desktop\Test"
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 For Each oFile In oFSO.GetFolder(sFolder).Files
 	fileName = oFile
@@ -34,7 +34,7 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 Next
 
 Function saveAndCloseXlsx(objWorkbook)
-objWorkbook.ExportAsFixedFormat xiTypePDF, "C:\Users\Ian Pennebaker\Desktop\Test\QMS-Manual\" & fileName
+objWorkbook.ExportAsFixedFormat xiTypePDF, "C:\Users\Ian\Desktop\Test\" & fileName
 objWorkbook.Close
 end Function
 
@@ -43,7 +43,7 @@ end Function
 
 Set objWord = CreateObject("Word.Application")
 objWord.Visible = False
-sFolder = "C:\Users\Ian Pennebaker\Desktop\Test\QMS-Manual"
+sFolder = "C:\Users\Ian\Desktop\Test"
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 
 For Each oFile In oFSO.GetFolder(sFolder).Files
@@ -74,7 +74,7 @@ objWord.Quit
 
 Function SaveAndCloseDocx(objDoc)
 fileName = Replace(oFile.Name, ".docx", "")
-objDoc.SaveAs "C:\Users\Ian Pennebaker\Desktop\Test\QMS-Manual\" & fileName & ".pdf", wdFormatPDF
+objDoc.SaveAs "C:\Users\Ian\Desktop\Test\" & fileName & ".pdf", wdFormatPDF
 objDoc.Close
 End Function
 '--------------------------------------------------POWERPOINT---------------------------------------------------------------
