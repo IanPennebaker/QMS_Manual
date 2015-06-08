@@ -1,11 +1,11 @@
 Set copyFSO = CreateObject ("Scripting.FileSystemObject")
-	copyFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\Test\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\Test2"
-	copyFSO.moveFile "C:\Users\Ian\Desktop\QMS_Manual\Test\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\Temp"
+	copyFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\FinalPDF"
+	copyFSO.moveFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\Temp"
 '-----Excel------
 inputPrefix = cint(inputbox("Please enter two digit prefix for file you would like updated.","File Update"))
 Set objExcel = CreateObject("Excel.Application")
 objExcel.Visible = False
-sFolder = "C:\Users\Ian\Desktop\QMS_Manual\Test"
+sFolder = "C:\Users\Ian\Desktop\QMS_Manual\FileNames"
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 For Each oFile In oFSO.GetFolder(sFolder).Files
 	fileName = oFile
@@ -34,7 +34,7 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 Next
 
 Function saveAndCloseXlsx(objWorkbook)
-objWorkbook.ExportAsFixedFormat xiTypePDF, "C:\Users\Ian\Desktop\QMS_Manual\Test\" & fileName
+objWorkbook.ExportAsFixedFormat xiTypePDF, "C:\Users\Ian\Desktop\QMS_Manual\FileNames\" & fileName
 objWorkbook.Close
 end Function
 
@@ -43,7 +43,7 @@ end Function
 
 Set objWord = CreateObject("Word.Application")
 objWord.Visible = False
-sFolder = "C:\Users\Ian\Desktop\QMS_Manual\Test"
+sFolder = "C:\Users\Ian\Desktop\QMS_Manual\FileNames"
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 
 For Each oFile In oFSO.GetFolder(sFolder).Files
@@ -74,7 +74,7 @@ objWord.Quit
 
 Function SaveAndCloseDocx(objDoc)
 fileName = Replace(oFile.Name, ".docx", "")
-objDoc.SaveAs "C:\Users\Ian\Desktop\QMS_Manual\Test\" & fileName & ".pdf", wdFormatPDF
+objDoc.SaveAs "C:\Users\Ian\Desktop\QMS_Manual\FileNames\" & fileName & ".pdf", wdFormatPDF
 objDoc.Close
 End Function
 '--------------------------------------------------POWERPOINT---------------------------------------------------------------

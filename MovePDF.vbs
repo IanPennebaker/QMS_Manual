@@ -1,5 +1,5 @@
 '--------------------------------------------------MOVE PDFS---------------------------------------------------------------
-sFolder = "C:\Users\Ian\Desktop\QMS_Manual\Test"
+sFolder = "C:\Users\Ian\Desktop\QMS_Manual\FileNames"
 Set FSO = CreateObject("Scripting.FileSystemObject")
-FSO.moveFile "C:\Users\Ian\Desktop\QMS_Manual\Test\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\Test2"
-FSO.moveFile "C:\Users\Ian\Desktop\QMS_Manual\Temp\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\Test"
+FSO.moveFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\FinalPDF"
+FSO.moveFile "C:\Users\Ian\Desktop\QMS_Manual\Temp\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\FileNames"
