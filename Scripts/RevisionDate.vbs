@@ -63,7 +63,7 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 	myDateFile = myYear & "-" & myMonth & "-" & myDay
 	do while (i < arraySize)
 		If (cint(filePrefix) = cint(inputPrefix(i))) then
-			objWorksheet.PageSetup.RightFooter = "Revision Date: " & myDate & " C"
+			objWorksheet.PageSetup.CenterFooter = "Revision Date: " & myDate & " C"
 			objWorkbook.Save
 		End If
 		i = i + 1
