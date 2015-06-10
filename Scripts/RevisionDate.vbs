@@ -51,7 +51,7 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 	Set objWorksheet = nothing
  	If UCase(oFSO.GetExtensionName(oFile.Name)) = "XLSX" Then
 	Prefix = left(oFile.Name,2)
-	filePrefix = cint(Prefix)
+	filePrefix = Prefix
 	Set objWorkbook = objExcel.Workbooks.Open(fileName)
 	Set objSelection = objExcel.Selection
 	Set objWorksheet = objWorkbook.Worksheets(1)		
