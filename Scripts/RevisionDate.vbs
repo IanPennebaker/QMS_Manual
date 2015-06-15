@@ -1,7 +1,8 @@
 Set copyFSO = CreateObject ("Scripting.FileSystemObject")
 copyFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\FinalPDF"
 copyFSO.moveFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\Temp"
-
+sysDate = CDbl(Date)
+sysDate = Clng(sysDate)
 
 sFolder = "C:\Users\Ian\Desktop\QMS_Manual\FileNames"
 Set oFSO = CreateObject("Scripting.FileSystemObject")
@@ -9,8 +10,6 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 	myDate = CDbl(oFile.DateLastModified)
 	myDate = left(myDate,5)
 	myDate = clng(myDate)
-	sysDate = CDbl(Date)
-	sysDate = Clng(sysDate)
 	fileName = oFile
 	If (UCase(oFSO.GetExtensionName(oFile.Name)) = "DOCX") Then
 		Set objWord = CreateObject("Word.Application")
@@ -45,13 +44,12 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 			Set objSelection = objExcel.Selection
 			Set objWorksheet = objWorkbook.Worksheets(1)		
 			objExcel.DisplayAlerts = False
-			myYear = Year(Now())
-			myMonth = Month(Now())
-			myDay = Day(Now())		
-			myDate = myYear & "/" & myMonth & "/" & myDay
-			myDateFile = myYear & "-" & myMonth & "-" & myDay
-			msgbox (myDate & " & : " & sysDate)
-				if (myDate = sysDate) then
+			if (myDate = sysDate) then
+				myYear = Year(Now())
+				myMonth = Month(Now())
+				myDay = Day(Now())
+				myDate = myYear & "/" & myMonth & "/" & myDay
+				myDateFile = myYear & "-" & myMonth & "-" & myDay
 				objWorksheet.PageSetup.CenterFooter = "Revision Date: " & myDate & " C"
 				objWorkbook.Save
 			End if
