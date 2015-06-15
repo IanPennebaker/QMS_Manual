@@ -31,6 +31,7 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 		End if
 		wdFormatPDF = 17
 		saveAndCloseDocx objDoc
+		objWord.quit
 	Elseif (UCase(oFSO.GetExtensionName(oFile.Name)) = "XLSX") Then
 		Set objExcel = CreateObject("Excel.Application")
 		objExcel.Visible = False
