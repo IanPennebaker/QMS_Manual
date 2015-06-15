@@ -108,7 +108,7 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 				End If
 				i = i + 1
 			loop
-			wdFormatPDF = 17
+			'wdFormatPDF = 17
 			SaveAndCloseDocx objDoc
 			End If	
 		End if
