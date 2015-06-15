@@ -50,6 +50,7 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 			myDay = Day(Now())		
 			myDate = myYear & "/" & myMonth & "/" & myDay
 			myDateFile = myYear & "-" & myMonth & "-" & myDay
+			msgbox (myDate & " & : " & sysDate)
 				if (myDate = sysDate) then
 				objWorksheet.PageSetup.CenterFooter = "Revision Date: " & myDate & " C"
 				objWorkbook.Save
