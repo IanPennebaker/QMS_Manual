@@ -31,7 +31,6 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 		End if
 		wdFormatPDF = 17
 		saveAndCloseDocx objDoc
-		objWord.quit
 	Elseif (UCase(oFSO.GetExtensionName(oFile.Name)) = "XLSX") Then
 		Set objExcel = CreateObject("Excel.Application")
 		objExcel.Visible = False
@@ -60,6 +59,10 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 		End if
 	End if
 Next
+set oFSO = Nothing
+objWord.quit
+
+
 Function saveAndCloseDocx(objDoc)
 fileName = Replace(oFile.Name, ".docx", "")
 objDoc.SaveAs "C:\Users\Ian\Desktop\QMS_Manual\FileNames\" & fileName & ".pdf", wdFormatPDF
