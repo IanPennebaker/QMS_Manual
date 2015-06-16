@@ -1,40 +1,35 @@
 Set copyFSO = CreateObject ("Scripting.FileSystemObject")
 copyFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\FinalPDF"
 copyFSO.moveFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\Temp"
-
 sysDate = CDbl(Date)
 sysDate = Clng(sysDate)
-currYear = Year(Now())
-currMonth = Month(Now())
-currDay = Day(Now())
-currDate = myYear & "/" & myMonth & "/" & myDay
+
 sFolder = "C:\Users\Ian\Desktop\QMS_Manual\FileNames"
 Set oFSO = CreateObject("Scripting.FileSystemObject")
-
-'Word
-
 For Each oFile In oFSO.GetFolder(sFolder).Files
-	fileDate = CDbl(oFile.DateLastModified)
-	fileDate = left(myDate,5)
-	fileDate = clng(myDate)
+	myDate = CDbl(oFile.DateLastModified)
+	myDate = left(myDate,5)
+	myDate = clng(myDate)
 	fileName = oFile
 	If (UCase(oFSO.GetExtensionName(oFile.Name)) = "DOCX") Then
 		Set objWord = CreateObject("Word.Application")
 		objWord.Visible = False
 		Set objDoc = objWord.Documents.Open(fileName)
 		Set objSelection = objWord.Selection
-		If (fileDate = sysDate) then
+		If (myDate = sysDate) then
 			If (objDoc.Bookmarks.Exists("RevisionDate") = True) then
 				Set objRange = objDoc.Bookmarks("RevisionDate").Range
+				myYear = Year(Now())
+				myMonth = Month(Now())
+				myDay = Day(Now())
+				myDate = myYear & "/" & myMonth & "/" & myDay
+				myDateFile = myYear & "-" & myMonth & "-" & myDay
 				objRange.text = "Revision Date: " & myDate & " C"
 				objDoc.Bookmarks.Add "RevisionDate", objRange
 			End if
 		End if
 		wdFormatPDF = 17
 		saveAndCloseDocx objDoc
-
-'Excel
-
 	Elseif (UCase(oFSO.GetExtensionName(oFile.Name)) = "XLSX") Then
 		Set objExcel = CreateObject("Excel.Application")
 		objExcel.Visible = False
@@ -50,6 +45,11 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 			Set objWorksheet = objWorkbook.Worksheets(1)		
 			objExcel.DisplayAlerts = False
 			if (myDate = sysDate) then
+				myYear = Year(Now())
+				myMonth = Month(Now())
+				myDay = Day(Now())
+				myDate = myYear & "/" & myMonth & "/" & myDay
+				myDateFile = myYear & "-" & myMonth & "-" & myDay
 				objWorksheet.PageSetup.CenterFooter = "Revision Date: " & myDate & " C"
 				objWorkbook.Save
 			End if
@@ -61,7 +61,6 @@ Next
 set oFSO = Nothing
 objWord.quit
 
-'Save Functions
 
 Function saveAndCloseDocx(objDoc)
 fileName = Replace(oFile.Name, ".docx", "")
