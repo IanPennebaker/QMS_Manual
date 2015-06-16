@@ -25,11 +25,9 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 		Set objSelection = objWord.Selection
 		If (fileDate = sysDate) then
 			If (objDoc.Bookmarks.Exists("RevisionDate") = True) then
-				'Set objRange = objDoc.Bookmarks("RevisionDate").Range
-				'objRange.text = "Revision Date: " & myDate & " C"
-				'objDoc.Bookmarks.Add "RevisionDate", objRange
-				ActiveWindow.ActivePane.View.SeekView = wdSeekCurrentPageFooter
-				Selection.TypeText Text="Goodbye"
+				Set objRange = objDoc.Bookmarks("RevisionDate").Range
+				objRange.text = "Revision Date: " & myDate & " C"
+				objDoc.Bookmarks.Add "RevisionDate", objRange
 			End if
 		End if
 		wdFormatPDF = 17
