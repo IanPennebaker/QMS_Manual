@@ -10,7 +10,8 @@ currDay = Day(Now())
 currDate = myYear & "/" & myMonth & "/" & myDay
 sFolder = "C:\Users\Ian\Desktop\QMS_Manual\FileNames"
 Set oFSO = CreateObject("Scripting.FileSystemObject")
-
+Set objWord = nothing
+set objExcel = nothing
 Dim originalPDF(28)
 i = 0
 do while (i < UBound(originalPDF))
@@ -40,6 +41,7 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 		Set objWord = CreateObject("Word.Application")
 		objWord.DisplayAlerts = False
 		objWord.Visible = False
+		msgbox fileName
 		Set objDoc = objWord.Documents.Open(fileName)
 		Set objSelection = objWord.Selection
 		If (fileDate = sysDate) then
@@ -76,9 +78,8 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 		saveAndCloseXlsx objWorkbook	
 		End if
 	End if
+WScript.Sleep(5000)
 Next
-set oFSO = Nothing
-objWord.quit
 
 'PDF Merge
 msgbox "merge"
@@ -120,6 +121,8 @@ Function saveAndCloseDocx(objDoc)
 fileName = Replace(oFile.Name, ".docx", "")
 objDoc.SaveAs "C:\Users\Ian\Desktop\QMS_Manual\FileNames\" & fileName & ".pdf", wdFormatPDF
 objDoc.Close
+objWord.quit
+
 End Function
 
 Function saveAndCloseXlsx(objWorkbook)
