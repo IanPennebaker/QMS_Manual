@@ -78,7 +78,6 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 		saveAndCloseXlsx objWorkbook	
 		End if
 	End if
-WScript.Sleep(5000)
 Next
 
 'PDF Merge
