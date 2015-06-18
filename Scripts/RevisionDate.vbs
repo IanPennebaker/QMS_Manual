@@ -19,7 +19,6 @@ do while (i < UBound(originalPDF))
 	i = i + 1
 loop
 i = 0
-msgbox "files"
 For Each oFile In oFSO.GetFolder(sFolder).Files
 	If (UCase(oFSO.GetExtensionName(oFile.Name)) = "PDF") Then
 		extension = oFile.Name
@@ -41,7 +40,6 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 		Set objWord = CreateObject("Word.Application")
 		objWord.DisplayAlerts = False
 		objWord.Visible = False
-		msgbox fileName
 		Set objDoc = objWord.Documents.Open(fileName)
 		Set objSelection = objWord.Selection
 		If (fileDate = sysDate) then
@@ -81,14 +79,12 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 Next
 
 'PDF Merge
-msgbox "merge"
+
 Dim objShell
 Set objShell = WScript.CreateObject("WScript.Shell")
 objShell.Run "C:\Users\Ian\Desktop\QMS_Manual\Scripts\pdftk.cmd"
 
 'Delete left over PDFs
-msgbox "delete"
-sFolder = "C:\Users\Ian\Desktop\QMS_Manual\FileNames"
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 For Each oFile In oFSO.GetFolder(sFolder).Files
 	
@@ -100,8 +96,9 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 		i = 0
 		extension = oFile.Name
 		prefix = left(extension,2)
-		castedPrefix = cint(extension)
+		castedPrefix = extension
 		i = i + 1
+		msgbox(oFile.Name)
 		do while (i < UBound(originalPDF))
 			if (UCase(oFSO.GetExtensionName(oFile.Name)) = "PDF" and (originalPDF(i) <> castedPrefix)) then
 				oFSO.deleteFile oFile,true
