@@ -81,13 +81,13 @@ set oFSO = Nothing
 objWord.quit
 
 'PDF Merge
-msgbox merge
+msgbox "merge"
 Dim objShell
 Set objShell = WScript.CreateObject("WScript.Shell")
 objShell.Run "C:\Users\Ian\Desktop\QMS_Manual\Scripts\pdftk.cmd"
 
 'Delete left over PDFs
-msgbox delete
+msgbox "delete"
 sFolder = "C:\Users\Ian\Desktop\QMS_Manual\FileNames"
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 For Each oFile In oFSO.GetFolder(sFolder).Files
@@ -111,7 +111,7 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 next
 
 
-msgbox ran
+msgbox "ran"
 
 
 'Save Functions
