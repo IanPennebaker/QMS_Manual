@@ -1,6 +1,6 @@
-'Set copyFSO = CreateObject ("Scripting.FileSystemObject")
-'copyFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\FinalPDF"
-'copyFSO.moveFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\Temp"
+Set copyFSO = CreateObject ("Scripting.FileSystemObject")
+copyFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\FinalPDF"
+copyFSO.moveFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\Temp"
 
 sysDate = CDbl(Date)
 sysDate = Clng(sysDate)
@@ -11,25 +11,7 @@ currDate = myYear & "/" & myMonth & "/" & myDay
 sFolder = "C:\Users\Ian\Desktop\QMS_Manual\FileNames"
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 
-Dim originalPDF(28)
-i = 0
-do while (i < UBound(originalPDF))
-	originalPDF(i) = -1
-	i = i + 1
-loop
-i = 0
-msgbox "files"
-For Each oFile In oFSO.GetFolder(sFolder).Files
-	If (UCase(oFSO.GetExtensionName(oFile.Name)) = "PDF") Then
-		extension = oFile.Name
-		extension = left(extension,2)
-		originalPDF(i) = cint(extension)
-		i = i + 1
-	end if
-next
-	
 'Word
-
 
 For Each oFile In oFSO.GetFolder(sFolder).Files
 	fileDate = CDbl(oFile.DateLastModified)
@@ -78,40 +60,6 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 Next
 set oFSO = Nothing
 objWord.quit
-
-'PDF Merge
-msgbox merge
-Dim objShell
-Set objShell = WScript.CreateObject("WScript.Shell")
-objShell.Run "C:\Users\Ian\Desktop\QMS_Manual\Scripts\pdftk.cmd"
-
-'Delete left over PDFs
-msgbox delete
-sFolder = "C:\Users\Ian\Desktop\QMS_Manual\FileNames"
-Set oFSO = CreateObject("Scripting.FileSystemObject")
-For Each oFile In oFSO.GetFolder(sFolder).Files
-	
-	
-	if (oFile.Name = "ECMWC.pdf") then
-		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FinalPDF\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
-		oFSO.deleteFile oFile, true
-	else
-		i = 0
-		extension = oFile.Name
-		prefix = left(extension,2)
-		castedPrefix = cint(extension)
-		i = i + 1
-		do while (i < UBound(originalPDF))
-			if (UCase(oFSO.GetExtensionName(oFile.Name)) = "PDF" and (originalPDF(i) <> castedPrefix)) then
-				oFSO.deleteFile oFile,true
-			end if
-		loop
-	end if
-next
-
-
-msgbox ran
-
 
 'Save Functions
 
