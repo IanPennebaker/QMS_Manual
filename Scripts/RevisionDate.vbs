@@ -22,7 +22,6 @@ i = 0
 For Each oFile In oFSO.GetFolder(sFolder).Files
 	If (UCase(oFSO.GetExtensionName(oFile.Name)) = "PDF") Then
 		originalPDF(i) = oFile.Name
-		msgbox(originalPDF(i))
 		i = i + 1
 	end if
 next
@@ -87,13 +86,12 @@ objShell.Run "C:\Users\Ian\Desktop\QMS_Manual\Scripts\pdftk.cmd"
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 For Each oFile In oFSO.GetFolder(sFolder).Files
 	
-	
+	msgbox(oFile.Name)
 	if (oFile.Name = "ECMWC.pdf") then
 		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FinalPDF\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
 		oFSO.deleteFile oFile
 	else
 		i = 0
-		msgbox(oFile.Name)
 		do while (i < UBound(originalPDF))
 			if (UCase(oFSO.GetExtensionName(oFile.Name)) = "PDF" and (originalPDF(i) <> oFile.Name))  then
 				if (i = UBound(originalPDF) - 1) then
