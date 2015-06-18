@@ -24,6 +24,7 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 		extension = oFile.Name
 		extension = left(extension,2)
 		originalPDF(i) = cint(extension)
+		msgbox(originalPDF(i))
 		i = i + 1
 	end if
 next
