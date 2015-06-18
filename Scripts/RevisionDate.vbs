@@ -38,6 +38,7 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 	fileName = oFile
 	If (UCase(oFSO.GetExtensionName(oFile.Name)) = "DOCX") Then
 		Set objWord = CreateObject("Word.Application")
+		objExcel.DisplayAlerts = False
 		objWord.Visible = False
 		Set objDoc = objWord.Documents.Open(fileName)
 		Set objSelection = objWord.Selection
