@@ -96,10 +96,11 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 		i = 0
 		extension = oFile.Name
 		prefix = left(extension,2)
-		castedPrefix = extension
+		castedPrefix = prefix
 		i = i + 1
 		msgbox(oFile.Name)
 		do while (i < UBound(originalPDF))
+			msgbox(originalPDF(i) &" : "& castedPrefix)
 			if (UCase(oFSO.GetExtensionName(oFile.Name)) = "PDF" and (originalPDF(i) <> castedPrefix)) then
 				oFSO.deleteFile oFile,true
 			end if
