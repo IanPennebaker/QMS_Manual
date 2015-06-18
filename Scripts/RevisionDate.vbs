@@ -14,7 +14,6 @@ Set objWord = nothing
 set objExcel = nothing
 Dim originalPDF(28)
 i = 0
-msgbox(UBound(originalPDF))
 do while (i < UBound(originalPDF))
 	originalPDF(i) = -1
 	i = i + 1
@@ -22,9 +21,7 @@ loop
 i = 0
 For Each oFile In oFSO.GetFolder(sFolder).Files
 	If (UCase(oFSO.GetExtensionName(oFile.Name)) = "PDF") Then
-		extension = oFile.Name
-		extension = left(extension,2)
-		originalPDF(i) = cint(extension)
+		originalPDF(i) = oFile.Name
 		msgbox(originalPDF(i))
 		i = i + 1
 	end if
@@ -96,12 +93,9 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 		oFSO.deleteFile oFile, true
 	else
 		i = 0
-		extension = oFile.Name
-		prefix = left(extension,2)
-		castedPrefix = prefix
 		msgbox(oFile.Name)
 		do while (i < UBound(originalPDF))
-			if (UCase(oFSO.GetExtensionName(oFile.Name)) = "PDF" and (originalPDF(i) <> castedPrefix))  then
+			if (UCase(oFSO.GetExtensionName(oFile.Name)) = "PDF" and (originalPDF(i) <> oFile.Name))  then
 				if (i = UBound(originalPDF) - 1) then
 					oFSO.deleteFile oFile, true
 				end if
