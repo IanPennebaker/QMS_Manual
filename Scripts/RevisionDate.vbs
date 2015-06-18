@@ -14,6 +14,7 @@ Set objWord = nothing
 set objExcel = nothing
 Dim originalPDF(28)
 i = 0
+msgbox(UBound(originalPDF))
 do while (i < UBound(originalPDF))
 	originalPDF(i) = -1
 	i = i + 1
