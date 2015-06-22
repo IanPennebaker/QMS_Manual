@@ -31,8 +31,8 @@ next
 
 For Each oFile In oFSO.GetFolder(sFolder).Files
 	fileDate = CDbl(oFile.DateLastModified)
-	fileDate = left(myDate,5)
-	fileDate = clng(myDate)
+	fileDate = left(fileDate,5)
+	fileDate = clng(fileDate)
 	fileName = oFile
 	If (UCase(oFSO.GetExtensionName(oFile.Name)) = "DOCX") Then
 		Set objWord = CreateObject("Word.Application")
