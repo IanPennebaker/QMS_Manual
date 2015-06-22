@@ -90,13 +90,13 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 	if (oFile.Name = "ECMWC.pdf") then
 		msgbox(oFile.Name)
 		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FinalPDF\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
-		oFSO.deleteFile oFile
+		'oFSO.deleteFile oFile
 	else
 		i = 0
 		do while (i < UBound(originalPDF))
 			if (UCase(oFSO.GetExtensionName(oFile.Name)) = "PDF" and (originalPDF(i) <> oFile.Name))  then
 				if (i = UBound(originalPDF) - 1) then
-					oFSO.deleteFile oFile, true
+					'oFSO.deleteFile oFile, true
 				end if
 			else
 				exit do
