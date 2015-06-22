@@ -108,6 +108,7 @@ next
 
 'Copy and Delete final pdf
 
+WScript.Sleep 5000
 sFolder = "C:\Users\Ian\Desktop\QMS_Manual\fileNames"
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 For Each oFile In oFSO.GetFolder(sFolder).Files
