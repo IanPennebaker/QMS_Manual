@@ -41,10 +41,11 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 		Set objDoc = objWord.Documents.Open(fileName)
 		Set objSelection = objWord.Selection
 		If (fileDate = sysDate) then
+			msgbox "ran word 0"
 			If (objDoc.Bookmarks.Exists("RevisionDate") = True) then
 				Set objRange = objDoc.Bookmarks("RevisionDate").Range
 				objRange.text = "Revision Date: " & myDate & " C"
-				msgbox "ran word"
+				msgbox "ran word 1"
 				objDoc.Bookmarks.Add "RevisionDate", objRange
 			End if
 		End if
