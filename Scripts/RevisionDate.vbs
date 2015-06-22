@@ -41,11 +41,9 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 		Set objDoc = objWord.Documents.Open(fileName)
 		Set objSelection = objWord.Selection
 		If (fileDate = sysDate) then
-			msgbox "ran word 0"
 			If (objDoc.Bookmarks.Exists("RevisionDate") = True) then
 				Set objRange = objDoc.Bookmarks("RevisionDate").Range
 				objRange.text = "Revision Date: " & currDate & " C"
-				msgbox "ran word 1"
 				objDoc.Bookmarks.Add "RevisionDate", objRange
 			End if
 		End if
@@ -70,7 +68,6 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 			objExcel.DisplayAlerts = False
 			if (fileDate = sysDate) then
 				objWorksheet.PageSetup.CenterFooter = "Revision Date: " & currDate & " C"
-				msgbox "ran excel"
 				objWorkbook.Save
 			End if
 		fileName = Replace(oFile.Name, ".xlsx", "")
@@ -107,6 +104,16 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 			end if
 			i = i + 1
 		loop
+	end if
+next
+
+sFolder = "C:\Users\Ian\Desktop\QMS_Manual\fileNames"
+Set oFSO = CreateObject("Scripting.FileSystemObject")
+For Each oFile In oFSO.GetFolder(sFolder).Files
+	if (oFile.Name = "ECMWC.pdf") then
+		msgbox(oFile.Name)
+		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
+		oFSO.deleteFile oFile, true
 	end if
 next
 
