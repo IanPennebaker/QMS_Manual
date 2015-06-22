@@ -44,7 +44,7 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 			msgbox "ran word 0"
 			If (objDoc.Bookmarks.Exists("RevisionDate") = True) then
 				Set objRange = objDoc.Bookmarks("RevisionDate").Range
-				objRange.text = "Revision Date: " & myDate & " C"
+				objRange.text = "Revision Date: " & currDate & " C"
 				msgbox "ran word 1"
 				objDoc.Bookmarks.Add "RevisionDate", objRange
 			End if
@@ -68,8 +68,8 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 			Set objSelection = objExcel.Selection
 			Set objWorksheet = objWorkbook.Worksheets(1)		
 			objExcel.DisplayAlerts = False
-			if (myDate = sysDate) then
-				objWorksheet.PageSetup.CenterFooter = "Revision Date: " & myDate & " C"
+			if (fileDate = sysDate) then
+				objWorksheet.PageSetup.CenterFooter = "Revision Date: " & currDate & " C"
 				msgbox "ran excel"
 				objWorkbook.Save
 			End if
