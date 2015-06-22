@@ -89,32 +89,20 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 	
 	if (oFile.Name = "ECMWC.pdf") then
 		msgbox(oFile.Name)
-		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FinalPDF\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
-		'oFSO.deleteFile oFile
+		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\Filenames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
+		oFSO.deleteFile oFile
 	else
 		i = 0
 		do while (i < UBound(originalPDF))
 			if (UCase(oFSO.GetExtensionName(oFile.Name)) = "PDF" and (originalPDF(i) <> oFile.Name))  then
 				if (i = UBound(originalPDF) - 1) then
-					'oFSO.deleteFile oFile, true
+					oFSO.deleteFile oFile, true
 				end if
 			else
 				exit do
 			end if
 			i = i + 1
 		loop
-	end if
-next
-
-'Copy and Delete final pdf
-
-WScript.Sleep 5000
-sFolder = "C:\Users\Ian\Desktop\QMS_Manual\fileNames"
-Set oFSO = CreateObject("Scripting.FileSystemObject")
-For Each oFile In oFSO.GetFolder(sFolder).Files
-	if (oFile.Name = "ECMWC.pdf") then
-		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
-		oFSO.deleteFile oFile, true
 	end if
 next
 
