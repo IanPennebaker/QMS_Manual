@@ -44,6 +44,7 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 			If (objDoc.Bookmarks.Exists("RevisionDate") = True) then
 				Set objRange = objDoc.Bookmarks("RevisionDate").Range
 				objRange.text = "Revision Date: " & myDate & " C"
+				msgbox "ran word"
 				objDoc.Bookmarks.Add "RevisionDate", objRange
 			End if
 		End if
@@ -68,6 +69,7 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 			objExcel.DisplayAlerts = False
 			if (myDate = sysDate) then
 				objWorksheet.PageSetup.CenterFooter = "Revision Date: " & myDate & " C"
+				msgbox "ran excel"
 				objWorkbook.Save
 			End if
 		fileName = Replace(oFile.Name, ".xlsx", "")
