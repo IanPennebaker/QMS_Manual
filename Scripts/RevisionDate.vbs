@@ -84,6 +84,7 @@ Next
 Dim objShell
 Set objShell = WScript.CreateObject("WScript.Shell")
 objShell.Run "C:\Users\Ian\Desktop\QMS_Manual\Scripts\pdftk.cmd"
+Wscript.sleep 5000
 
 'Delete left over PDFs
 Set oFSO = CreateObject("Scripting.FileSystemObject")
