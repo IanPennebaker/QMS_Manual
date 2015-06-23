@@ -7,16 +7,19 @@ currYear = Year(Now())
 currMonth = Month(Now())
 currDay = Day(Now())
 currDate = currYear & "/" & currMonth & "/" & currDay
+currFDate = currYear & "-" & currMonth & "-" & currDay
 Set objWord = nothing
 set objExcel = nothing
 Dim originalPDF(28)
+Dim filesUpdated(28)
+fileUpdateCount = 0
 i = 0
 do while (i < UBound(originalPDF))
 	originalPDF(i) = -1
 	i = i + 1
 loop
 i = 0
-For Each oFile In oFSO.GetFolder(sFolder/fileNames).Files
+For Each oFile In oFSO.GetFolder(sFolder & "\fileNames").Files
 	If (UCase(oFSO.GetExtensionName(oFile.Name)) = "PDF") Then
 		originalPDF(i) = oFile.Name
 		i = i + 1
@@ -25,7 +28,7 @@ next
 	
 'Word
 
-For Each oFile In oFSO.GetFolder(sFolder\filenames).Files
+For Each oFile In oFSO.GetFolder(sFolder & "\fileNames").Files
 	fileDate = CDbl(oFile.DateLastModified)
 	fileDate = left(fileDate,5)
 	fileDate = clng(fileDate)
@@ -41,6 +44,8 @@ For Each oFile In oFSO.GetFolder(sFolder\filenames).Files
 				Set objRange = objDoc.Bookmarks("RevisionDate").Range
 				objRange.text = "Revision Date: " & currDate & " C"
 				objDoc.Bookmarks.Add "RevisionDate", objRange
+				filesUpdated(fileUpdateCount) = oFile.Name
+				fileUpdateCount = fileUpdateCount + 1
 			End if
 		End if
 		wdFormatPDF = 17
@@ -65,6 +70,9 @@ For Each oFile In oFSO.GetFolder(sFolder\filenames).Files
 			if (fileDate = sysDate) then
 				objWorksheet.PageSetup.CenterFooter = "Revision Date: " & currDate & " C"
 				objWorkbook.Save
+				filesUpdated(fileUpdateCount) = oFile.Name
+				fileUpdateCount = fileUpdateCount + 1
+				
 			End if
 		fileName = Replace(oFile.Name, ".xlsx", "")
 		saveAndCloseXlsx objWorkbook	
@@ -76,14 +84,14 @@ Next
 
 Dim objShell
 Set objShell = WScript.CreateObject("WScript.Shell")
-objShell.Run "C:\Users\Ian\Desktop\QMS_Manual\Scripts\pdftk.cmd"
+objShell.Run sFolder & "\pdftk.cmd"
 Wscript.sleep 5000
 
 'Delete left over PDFs
 Set oFSO = CreateObject("Scripting.FileSystemObject")
-For Each oFile In oFSO.GetFolder(sFolder\filenames).Files
+For Each oFile In oFSO.GetFolder(sFolder & "\fileNames").Files
 	if (oFile.Name = "ECMWC.pdf") then
-		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\Filenames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
+		oFSO.copyFile sFolder & "\Filenames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
 		oFSO.deleteFile oFile
 	else
 		i = 0
@@ -100,26 +108,36 @@ For Each oFile In oFSO.GetFolder(sFolder\filenames).Files
 	end if
 next
 
-sFolder = "C:\Users\Ian\Desktop\QMS_Manual\fileNames"
-Set oFSO = CreateObject("Scripting.FileSystemObject")
-For Each oFile In oFSO.GetFolder(sFolder\filenames).Files
+
+For Each oFile In oFSO.GetFolder(sFolder & "\fileNames").Files
 	if (oFile.Name = "ECMWC.pdf") then
-		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
+		oFSO.copyFile sFolder & "\FileNames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
 		oFSO.deleteFile oFile, true
 	end if
 next
+
+'Text Document Output
+
+Set objFSO = CreateObject("Scripting.FileSystemObject")
+Set objFile = objFSO.CreateTextFile("c:\users\ian\desktop\qms_manual\" & currFDate & ".txt", True)
+do while (i < fileUpdateCount)
+	msgbox filesUpdated(i)
+	objFile.Write(filesUpdated(i))
+	i = i + 1
+loop
+objFile.Close
 
 'Save Functions
 
 Function saveAndCloseDocx(objDoc)
 fileName = Replace(oFile.Name, ".docx", "")
-objDoc.SaveAs "C:\Users\Ian\Desktop\QMS_Manual\FileNames\" & fileName & ".pdf", wdFormatPDF
+objDoc.SaveAs sFolder & "\FileNames\" & fileName & ".pdf", wdFormatPDF
 objDoc.Close
 objWord.quit
 
 End Function
 
 Function saveAndCloseXlsx(objWorkbook)
-objWorkbook.ExportAsFixedFormat xiTypePDF, "C:\Users\Ian\Desktop\QMS_Manual\FileNames\" & fileName
+objWorkbook.ExportAsFixedFormat xiTypePDF, sFolder & "\FileNames\" & fileName
 objWorkbook.Close
 end Function
