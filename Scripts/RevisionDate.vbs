@@ -1,5 +1,3 @@
-'Variable setup
-
 sysDate = CDbl(Date)
 sysDate = Clng(sysDate)
 currYear = Year(Now())
@@ -82,24 +80,25 @@ Wscript.sleep 3000
 
 'Delete left over PDFs
 
+Set oFSO = CreateObject("Scripting.FileSystemObject")
 For Each oFile In oFSO.GetFolder(sFolder).Files
-	i = 0
-	do while (i < UBound(originalPDF))
-		if (UCase(oFSO.GetExtensionName(oFile.Name)) = "PDF" and (originalPDF(i) <> oFile.Name))  then
-			if (i = UBound(originalPDF) - 1) then
-				oFSO.deleteFile oFile, true
-			end if
-		else
-			exit do
-		end if
-		i = i + 1
-	loop
-next
-
-For Each oFile In oFSO.GetFolder(sFolder).Files
+		
 	if (oFile.Name = "ECMWC.pdf") then
-		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
-		oFSO.deleteFile oFile, true
+		msgbox(oFile.Name)
+		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\Filenames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
+		oFSO.deleteFile oFile
+	else
+		i = 0
+		do while (i < UBound(originalPDF))
+			if (UCase(oFSO.GetExtensionName(oFile.Name)) = "PDF" and (originalPDF(i) <> oFile.Name))  then
+				if (i = UBound(originalPDF) - 1) then
+					oFSO.deleteFile oFile, true
+				end if
+			else
+				exit do
+			end if
+			i = i + 1
+		loop
 	end if
 next
 
