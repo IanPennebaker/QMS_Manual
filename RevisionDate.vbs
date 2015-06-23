@@ -102,6 +102,13 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 	end if
 next
 
+For Each oFile In oFSO.GetFolder(sFolder).Files
+	if (oFile.Name = "ECMWC.pdf") then
+		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
+		oFSO.deleteFile oFile, true
+	end if
+next
+
 'Save Functions
 
 Function saveAndCloseDocx(objDoc)
