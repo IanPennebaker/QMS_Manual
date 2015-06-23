@@ -1,6 +1,6 @@
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 CurrentDirectory = oFSO.GetAbsolutePathName(".")
-sFolder = CurrentDirectory & "\FileNames"
+sFolder = CurrentDirectory & "\QMS_Manual\FileNames"
 msgbox sfolder
 sysDate = CDbl(Date)
 sysDate = Clng(sysDate)
@@ -77,7 +77,7 @@ Next
 
 Dim objShell
 Set objShell = WScript.CreateObject("WScript.Shell")
-objShell.Run CurrentDirectory & "\pdftk.cmd"
+objShell.Run CurrentDirectory & "\QMS_Manual\Scripts\pdftk.cmd"
 Wscript.sleep 5000
 
 'Delete left over PDFs
@@ -85,7 +85,7 @@ Wscript.sleep 5000
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 For Each oFile In oFSO.GetFolder(sFolder).Files
 	if (oFile.Name = "ECMWC.pdf") then
-		oFSO.copyFile CurrentDirectory & "\Filenames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
+		oFSO.copyFile CurrentDirectory & "\QMS_Manual\Filenames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
 		oFSO.deleteFile oFile
 	else
 		i = 0
@@ -106,13 +106,13 @@ next
 
 Function saveAndCloseDocx(objDoc)
 fileName = Replace(oFile.Name, ".docx", "")
-objDoc.SaveAs CurrentDirectory & "\FileNames\" & fileName & ".pdf", wdFormatPDF
+objDoc.SaveAs CurrentDirectory & "\QMS_Manual\FileNames\" & fileName & ".pdf", wdFormatPDF
 objDoc.Close
 objWord.quit
 
 End Function
 
 Function saveAndCloseXlsx(objWorkbook)
-objWorkbook.ExportAsFixedFormat xiTypePDF, CurrentDirectory & "\FileNames\" & fileName
+objWorkbook.ExportAsFixedFormat xiTypePDF, CurrentDirectory & "\QMS_Manual\FileNames\" & fileName
 objWorkbook.Close
 end Function
