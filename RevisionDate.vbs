@@ -2,10 +2,10 @@ Set oFSO = CreateObject("Scripting.FileSystemObject")
 sFolder = oFSO.GetAbsolutePathName(".")
 sysDate = CDbl(Date)
 sysDate = Clng(sysDate)
-currYear = Year(Now())
+currYear = Right(Year(Now()),2)
 currMonth = Month(Now())
 currDay = Day(Now())
-currDate = currYear & "-" & currMonth & "-" & currDay
+currDate = currMonth & "-" & currDay & "-" & currYear
 Set objWord = nothing
 set objExcel = nothing
 Dim originalPDF(28)
