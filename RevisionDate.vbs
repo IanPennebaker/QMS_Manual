@@ -1,6 +1,6 @@
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 CurrentDirectory = oFSO.GetAbsolutePathName(".")
-sFolder = CurrentDirectory & "\QMS_Manual\FileNames"
+sFolder = CurrentDirectory & "\FileNames"
 msgbox sfolder
 sysDate = CDbl(Date)
 sysDate = Clng(sysDate)
