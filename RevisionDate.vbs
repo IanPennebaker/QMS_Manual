@@ -85,7 +85,7 @@ Wscript.sleep 5000
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 For Each oFile In oFSO.GetFolder(sFolder).Files
 	if (oFile.Name = "ECMWC.pdf") then
-		oFSO.copyFile CurrentDirectory & "\QMS_Manual\Filenames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
+		oFSO.copyFile CurrentDirectory & "\Filenames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
 		oFSO.deleteFile oFile
 	else
 		i = 0
