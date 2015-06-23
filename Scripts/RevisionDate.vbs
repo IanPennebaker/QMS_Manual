@@ -1,6 +1,4 @@
-'Set copyFSO = CreateObject ("Scripting.FileSystemObject")
-'copyFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\FinalPDF"
-'copyFSO.moveFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\*.pdf", "C:\Users\Ian\Desktop\QMS_Manual\Temp"
+'Variable setup
 
 sysDate = CDbl(Date)
 sysDate = Clng(sysDate)
@@ -27,7 +25,6 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 next
 	
 'Word
-
 
 For Each oFile In oFSO.GetFolder(sFolder).Files
 	fileDate = CDbl(oFile.DateLastModified)
@@ -81,34 +78,24 @@ Next
 Dim objShell
 Set objShell = WScript.CreateObject("WScript.Shell")
 objShell.Run "C:\Users\Ian\Desktop\QMS_Manual\Scripts\pdftk.cmd"
-Wscript.sleep 5000
+Wscript.sleep 3000
 
 'Delete left over PDFs
-Set oFSO = CreateObject("Scripting.FileSystemObject")
+
 For Each oFile In oFSO.GetFolder(sFolder).Files
-	
-	
-	if (oFile.Name = "ECMWC.pdf") then
-		msgbox(oFile.Name)
-		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\Filenames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
-		oFSO.deleteFile oFile
-	else
-		i = 0
-		do while (i < UBound(originalPDF))
-			if (UCase(oFSO.GetExtensionName(oFile.Name)) = "PDF" and (originalPDF(i) <> oFile.Name))  then
-				if (i = UBound(originalPDF) - 1) then
-					oFSO.deleteFile oFile, true
-				end if
-			else
-				exit do
+	i = 0
+	do while (i < UBound(originalPDF))
+		if (UCase(oFSO.GetExtensionName(oFile.Name)) = "PDF" and (originalPDF(i) <> oFile.Name))  then
+			if (i = UBound(originalPDF) - 1) then
+				oFSO.deleteFile oFile, true
 			end if
-			i = i + 1
-		loop
-	end if
+		else
+			exit do
+		end if
+		i = i + 1
+	loop
 next
 
-sFolder = "C:\Users\Ian\Desktop\QMS_Manual\fileNames"
-Set oFSO = CreateObject("Scripting.FileSystemObject")
 For Each oFile In oFSO.GetFolder(sFolder).Files
 	if (oFile.Name = "ECMWC.pdf") then
 		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
