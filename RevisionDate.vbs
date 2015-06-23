@@ -1,13 +1,11 @@
-Set oFSO = CreateObject("Scripting.FileSystemObject")
-CurrentDirectory = oFSO.GetAbsolutePathName(".")
-sFolder = CurrentDirectory & "\FileNames"
-msgbox sfolder
 sysDate = CDbl(Date)
 sysDate = Clng(sysDate)
 currYear = Year(Now())
 currMonth = Month(Now())
 currDay = Day(Now())
 currDate = currYear & "/" & currMonth & "/" & currDay
+sFolder = "C:\Users\Ian\Desktop\QMS_Manual\FileNames"
+Set oFSO = CreateObject("Scripting.FileSystemObject")
 Set objWord = nothing
 set objExcel = nothing
 Dim originalPDF(28)
@@ -77,15 +75,14 @@ Next
 
 Dim objShell
 Set objShell = WScript.CreateObject("WScript.Shell")
-objShell.Run CurrentDirectory & "\QMS_Manual\Scripts\pdftk.cmd"
+objShell.Run "C:\Users\Ian\Desktop\QMS_Manual\Scripts\pdftk.cmd"
 Wscript.sleep 5000
 
 'Delete left over PDFs
-
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 For Each oFile In oFSO.GetFolder(sFolder).Files
 	if (oFile.Name = "ECMWC.pdf") then
-		oFSO.copyFile CurrentDirectory & "\Filenames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
+		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\Filenames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
 		oFSO.deleteFile oFile
 	else
 		i = 0
@@ -102,6 +99,8 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 	end if
 next
 
+sFolder = "C:\Users\Ian\Desktop\QMS_Manual\fileNames"
+Set oFSO = CreateObject("Scripting.FileSystemObject")
 For Each oFile In oFSO.GetFolder(sFolder).Files
 	if (oFile.Name = "ECMWC.pdf") then
 		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
@@ -113,13 +112,13 @@ next
 
 Function saveAndCloseDocx(objDoc)
 fileName = Replace(oFile.Name, ".docx", "")
-objDoc.SaveAs CurrentDirectory & "\QMS_Manual\FileNames\" & fileName & ".pdf", wdFormatPDF
+objDoc.SaveAs "C:\Users\Ian\Desktop\QMS_Manual\FileNames\" & fileName & ".pdf", wdFormatPDF
 objDoc.Close
 objWord.quit
 
 End Function
 
 Function saveAndCloseXlsx(objWorkbook)
-objWorkbook.ExportAsFixedFormat xiTypePDF, CurrentDirectory & "\QMS_Manual\FileNames\" & fileName
+objWorkbook.ExportAsFixedFormat xiTypePDF, "C:\Users\Ian\Desktop\QMS_Manual\FileNames\" & fileName
 objWorkbook.Close
 end Function
