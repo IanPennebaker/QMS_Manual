@@ -76,15 +76,12 @@ Next
 Dim objShell
 Set objShell = WScript.CreateObject("WScript.Shell")
 objShell.Run "C:\Users\Ian\Desktop\QMS_Manual\Scripts\pdftk.cmd"
-Wscript.sleep 3000
+Wscript.sleep 5000
 
 'Delete left over PDFs
-
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 For Each oFile In oFSO.GetFolder(sFolder).Files
-		
 	if (oFile.Name = "ECMWC.pdf") then
-		msgbox(oFile.Name)
 		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\Filenames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
 		oFSO.deleteFile oFile
 	else
@@ -99,6 +96,15 @@ For Each oFile In oFSO.GetFolder(sFolder).Files
 			end if
 			i = i + 1
 		loop
+	end if
+next
+
+sFolder = "C:\Users\Ian\Desktop\QMS_Manual\fileNames"
+Set oFSO = CreateObject("Scripting.FileSystemObject")
+For Each oFile In oFSO.GetFolder(sFolder).Files
+	if (oFile.Name = "ECMWC.pdf") then
+		oFSO.copyFile "C:\Users\Ian\Desktop\QMS_Manual\FileNames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
+		oFSO.deleteFile oFile, true
 	end if
 next
 
