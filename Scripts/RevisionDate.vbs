@@ -1,7 +1,7 @@
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 CurrentDirectory = oFSO.GetAbsolutePathName(".")
 sFolder = CurrentDirectory & "\QMS_Manual\FileNames"
-
+msgbox sfolder
 sysDate = CDbl(Date)
 sysDate = Clng(sysDate)
 currYear = Year(Now())
