@@ -1,13 +1,11 @@
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 sFolder = oFSO.GetAbsolutePathName(".")
-msgbox sFolder
 sysDate = CDbl(Date)
 sysDate = Clng(sysDate)
 currYear = Year(Now())
 currMonth = Month(Now())
 currDay = Day(Now())
-currDate = currYear & "/" & currMonth & "/" & currDay
-currFDate = currYear & "-" & currMonth & "-" & currDay
+currDate = currYear & "-" & currMonth & "-" & currDay
 Set objWord = nothing
 set objExcel = nothing
 Dim originalPDF(28)
@@ -119,10 +117,11 @@ next
 'Text Document Output
 
 Set objFSO = CreateObject("Scripting.FileSystemObject")
-Set objFile = objFSO.CreateTextFile("c:\users\ian\desktop\qms_manual\" & currFDate & ".txt", True)
+Set objFile = objFSO.CreateTextFile("c:\users\ian\desktop\qms_manual\file changelog\" & currDate & ".txt", True)
+i = 0
+objFile.Write("Files Updated Succesfully" & vbCrLf)
 do while (i < fileUpdateCount)
-	msgbox filesUpdated(i)
-	objFile.Write(filesUpdated(i))
+	objFile.Write(filesUpdated(i) & vbCrLf)
 	i = i + 1
 loop
 objFile.Close
