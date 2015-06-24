@@ -120,11 +120,12 @@ Set objFSO = CreateObject("Scripting.FileSystemObject")
 if objFSO.FileExists(sFolder & "\file changelog\" & currDate & ".txt") then
 	i = 0
 	Set objFile = objFSO.OpenTextFile(sFolder & "\file changelog\" & currDate & ".txt", 8, True)
-	objFile.WriteLine("Files Updated Succesfully" & vbCrLf)
+	objFile.Write("Files Updated Succesfully" & vbCrLf)
 	do while (i < fileUpdateCount)
 		objFile.Write(filesUpdated(i) & vbCrLf)
 		i = i + 1
 	loop
+	objFile.Write(vbCrLf)
 	objFile.Close
 
 else
@@ -136,7 +137,9 @@ do while (i < fileUpdateCount)
 	objFile.Write(filesUpdated(i) & vbCrLf)
 	i = i + 1
 loop
+objFile.Write(vbCrLf)
 objFile.Close
+
 end if
 'Save Functions
 
