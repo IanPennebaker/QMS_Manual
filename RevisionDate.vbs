@@ -31,13 +31,14 @@ For Each oFile In oFSO.GetFolder(sFolder & "\fileNames").Files
 	fileDate = left(fileDate,5)
 	fileDate = clng(fileDate)
 	fileName = oFile
+	timeDiff = DateDiff("n",fileDate,sysDate)
 	If (UCase(oFSO.GetExtensionName(oFile.Name)) = "DOCX") Then
 		Set objWord = CreateObject("Word.Application")
 		objWord.DisplayAlerts = False
 		objWord.Visible = False
 		Set objDoc = objWord.Documents.Open(fileName)
 		Set objSelection = objWord.Selection
-		If (fileDate = sysDate) then
+		If (timeDiff < 30) then
 			If (objDoc.Bookmarks.Exists("RevisionDate") = True) then
 				Set objRange = objDoc.Bookmarks("RevisionDate").Range
 				objRange.text = "Revision Date: " & currDate & " C"
@@ -65,7 +66,7 @@ For Each oFile In oFSO.GetFolder(sFolder & "\fileNames").Files
 			Set objSelection = objExcel.Selection
 			Set objWorksheet = objWorkbook.Worksheets(1)		
 			objExcel.DisplayAlerts = False
-			if (fileDate = sysDate) then
+			if (timeDiff < 30) then
 				objWorksheet.PageSetup.CenterFooter = "Revision Date: " & currDate & " C"
 				objWorkbook.Save
 				filesUpdated(fileUpdateCount) = oFile.Name
