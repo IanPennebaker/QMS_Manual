@@ -117,15 +117,27 @@ next
 'Text Document Output
 
 Set objFSO = CreateObject("Scripting.FileSystemObject")
-Set objFile = objFSO.CreateTextFile("c:\users\ian\desktop\qms_manual\file changelog\" & currDate & ".txt", True)
+if objFSO.FileExists(sFolder & "\file changelog\" & currDate & ".txt") then
+	i = 0
+	Set objFile = objFSO.OpenTextFile(sFolder & "\file changelog\" & currDate & ".txt", 8, True)
+	objFile.WriteLine("Files Updated Succesfully" & vbCrLf)
+	do while (i < fileUpdateCount)
+		objFile.Write(filesUpdated(i) & vbCrLf)
+		i = i + 1
+	loop
+	objFile.Close
+
+else
+
+Set objFile = objFSO.CreateTextFile(sFolder & "\file changelog\" & currDate & ".txt", True)
 i = 0
-objFile.Write("Files Updated Succesfully" & vbCrLf)
+objFile.Write("Files Updated Succesfully" & vbCrLf & vbCrLf)
 do while (i < fileUpdateCount)
 	objFile.Write(filesUpdated(i) & vbCrLf)
 	i = i + 1
 loop
 objFile.Close
-
+end if
 'Save Functions
 
 Function saveAndCloseDocx(objDoc)
