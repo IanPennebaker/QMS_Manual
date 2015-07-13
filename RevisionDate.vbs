@@ -3,10 +3,7 @@ Set oFSO = CreateObject("Scripting.FileSystemObject")
 sFolder = oFSO.GetAbsolutePathName(".")
 gFolder = "C:\Users\Ian\Google Drive\QMS-Updated Names"
 
-For Each oFile In oFSO.GetFolder(gFolder).Files
-	oFSO.copyFile gFolder, sFolder & "\fileNames"
-	msgbox "ran"
-next
+oFSO.copyFile gFolder & "\*", sFolder & "\fileNames"
 
 sysDate = CDbl(Date)
 sysDate = Clng(sysDate)
