@@ -1,5 +1,5 @@
 Set oFSO = CreateObject("Scripting.FileSystemObject")
-sFolder = oFSO.GetAbsolutePathName(".")
+sFolder = "C:\Users\Ian\Google Drive"
 sysDate = CDbl(Date)
 sysDate = Clng(sysDate)
 currYear = Right(Year(Now()),2)
