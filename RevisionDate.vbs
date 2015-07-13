@@ -1,5 +1,12 @@
+'Setup
 Set oFSO = CreateObject("Scripting.FileSystemObject")
-sFolder = "C:\Users\Ian\Google Drive\QMS-Updated Names"
+sFolder = oFSO.GetAbsolutePathName(".")
+gFolder = "C:\Users\Ian\Google Drive\QMS-Updated Names"
+
+For Each oFile In oFSO.GetFolder(sFolder & "\fileNames").Files
+	oFSO.copyFile gFolder, sFolder & "\fileNames"
+next
+
 sysDate = CDbl(Date)
 sysDate = Clng(sysDate)
 currYear = Right(Year(Now()),2)
@@ -142,6 +149,11 @@ objFile.Write(vbCrLf)
 objFile.Close
 
 end if
+
+For Each oFile In oFSO.GetFolder(sFolder & "\fileNames").Files
+	oFSO.deleteFile sFolder & "\fileNames", true
+next
+
 'Save Functions
 
 Function saveAndCloseDocx(objDoc)
