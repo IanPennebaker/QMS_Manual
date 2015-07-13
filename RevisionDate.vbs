@@ -5,6 +5,7 @@ gFolder = "C:\Users\Ian\Google Drive\QMS-Updated Names"
 
 For Each oFile In oFSO.GetFolder(gFolder).Files
 	oFSO.copyFile gFolder, sFolder & "\fileNames"
+	msgbox "ran"
 next
 
 sysDate = CDbl(Date)
