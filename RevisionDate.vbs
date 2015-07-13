@@ -148,9 +148,7 @@ objFile.Close
 
 end if
 
-For Each oFile In oFSO.GetFolder(sFolder & "\fileNames").Files
-	oFSO.deleteFile sFolder & "\fileNames", true
-next
+oFSO.deleteFile sFolder & "\fileNames\*", true
 
 'Save Functions
 
