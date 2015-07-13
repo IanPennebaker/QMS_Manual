@@ -1,5 +1,5 @@
 Set oFSO = CreateObject("Scripting.FileSystemObject")
-sFolder = "C:\Users\Ian\Google Drive"
+sFolder = "C:\Users\Ian\Google Drive\QMS-Updated Names"
 sysDate = CDbl(Date)
 sysDate = Clng(sysDate)
 currYear = Right(Year(Now()),2)
