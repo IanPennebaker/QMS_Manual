@@ -1,9 +1,9 @@
 'Setup
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 sFolder = oFSO.GetAbsolutePathName(".")
-gFolder = "C:\Users\Ian\Google Drive\QMS-Updated Names"
+gFolder = "C:\Users\Ian\Google Drive"
 
-oFSO.copyFile gFolder & "\*", sFolder & "\fileNames"
+oFSO.copyFile gFolder & "\QMS File Names\*", sFolder & "\fileNames"
 
 sysDate = CDbl(Date)
 sysDate = Clng(sysDate)
@@ -136,7 +136,7 @@ if objFSO.FileExists(sFolder & "\file changelog\" & currDate & ".txt") then
 
 else
 
-Set objFile = objFSO.CreateTextFile(sFolder & "\file changelog\" & currDate & ".txt", True)
+Set objFile = objFSO.CreateTextFile(sFolder & "\fileChangeLog\" & currDate & ".txt", True)
 i = 0
 objFile.Write("Files Updated Succesfully" & vbCrLf & vbCrLf)
 do while (i < fileUpdateCount)
@@ -149,6 +149,7 @@ objFile.Close
 end if
 
 oFSO.deleteFile sFolder & "\fileNames\*", true
+oFSO.moveFile sFolder & "\fileChangeLog\*", gFolder & "\Changelog"
 
 'Save Functions
 
