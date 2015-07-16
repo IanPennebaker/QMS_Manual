@@ -3,6 +3,15 @@ Set oFSO = CreateObject("Scripting.FileSystemObject")
 sFolder = oFSO.GetAbsolutePathName(".")
 gFolder = "C:\Users\Ian\Google Drive"
 
+if oFSO.FolderExists(sFolder & "\fileNames") then
+	Wscript.Echo sFolder & "\fileNames exists."
+else 
+	Wscript.Echo sFolder & "\fileNames does not exist."
+	Wscript.Echo "Attempting to create folder."
+	Set oFolder = objFSO.CreateFolder(sFolder & "\fileNames")
+	Wscript.Echo "Success."
+end if
+
 oFSO.copyFile gFolder & "\QMS File Names\*", sFolder & "\fileNames"
 
 sysDate = CDbl(Date)
@@ -95,7 +104,7 @@ Wscript.sleep 5000
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 For Each oFile In oFSO.GetFolder(sFolder & "\fileNames").Files
 	if (oFile.Name = "ECMWC.pdf") then
-		oFSO.copyFile sFolder & "\Filenames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
+		oFSO.copyFile sFolder & "\Filenames\ECMWC.pdf", gFolder, true
 		oFSO.deleteFile oFile
 	else
 		i = 0
@@ -115,7 +124,7 @@ next
 
 For Each oFile In oFSO.GetFolder(sFolder & "\fileNames").Files
 	if (oFile.Name = "ECMWC.pdf") then
-		oFSO.copyFile sFolder & "\FileNames\ECMWC.pdf", "C:\Users\Ian\Google Drive\", true
+		oFSO.copyFile sFolder & "\FileNames\ECMWC.pdf", gFolder, true
 		oFSO.deleteFile oFile, true
 	end if
 next
@@ -123,10 +132,10 @@ next
 'Text Document Output
 
 Set objFSO = CreateObject("Scripting.FileSystemObject")
-if objFSO.FileExists(sFolder & "\file changelog\" & currDate & ".txt") then
+if objFSO.FileExists(sFolder & "\fileChangeLog\" & currDate & ".txt") then
 	i = 0
-	Set objFile = objFSO.OpenTextFile(sFolder & "\file changelog\" & currDate & ".txt", 8, True)
-	objFile.Write("Files Updated Succesfully" & vbCrLf)
+	Set objFile = objFSO.OpenTextFile(sFolder & "\fileChangeLog\" & currDate & ".txt", 8, True)
+	objFile.Write("Files Updated Successfully" & vbCrLf)
 	do while (i < fileUpdateCount)
 		objFile.Write(filesUpdated(i) & vbCrLf)
 		i = i + 1
@@ -138,7 +147,7 @@ else
 
 Set objFile = objFSO.CreateTextFile(sFolder & "\fileChangeLog\" & currDate & ".txt", True)
 i = 0
-objFile.Write("Files Updated Succesfully" & vbCrLf & vbCrLf)
+objFile.Write("Files Updated Successfully" & vbCrLf & vbCrLf)
 do while (i < fileUpdateCount)
 	objFile.Write(filesUpdated(i) & vbCrLf)
 	i = i + 1
@@ -149,7 +158,7 @@ objFile.Close
 end if
 
 oFSO.deleteFile sFolder & "\fileNames\*", true
-oFSO.moveFile sFolder & "\fileChangeLog\*", gFolder & "\Changelog"
+oFSO.moveFile sFolder & "\fileChangeLog\*", gFolder & "\fileChangelog"
 
 'Save Functions
 
