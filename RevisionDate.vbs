@@ -3,20 +3,20 @@ Set oFSO = CreateObject("Scripting.FileSystemObject")
 sFolder = oFSO.GetAbsolutePathName(".")
 gFolder = "C:\Users\Ian\Google Drive"
 
-if oFSO.FolderExists(sFolder & "\fileNames") then
-else 
-	Set oFolder = oFSO.CreateFolder(sFolder & "\fileNames")
-end if
+'if oFSO.FolderExists(sFolder & "\fileNames") then
+'else 
+'	Set oFolder = oFSO.CreateFolder(sFolder & "\fileNames")
+'end if
 
-if oFSO.FolderExists(sFolder & "\fileChangeLog") then
-else 
-	Set oFolder = oFSO.CreateFolder(sFolder & "\fileChangeLog")
-end if
+'if oFSO.FolderExists(sFolder & "\fileChangeLog") then
+'else 
+'	Set oFolder = oFSO.CreateFolder(sFolder & "\fileChangeLog")
+'end if
 
-if oFSO.FolderExists(gFolder & "\fileChangeLog") then
-else 
-	Set oFolder = oFSO.CreateFolder(gFolder & "\fileChangeLog")
-end if
+'if oFSO.FolderExists(gFolder & "\fileChangeLog") then
+'else 
+'	Set oFolder = oFSO.CreateFolder(gFolder & "\fileChangeLog")
+'end if
 
 oFSO.copyFile gFolder & "\QMS File Names\*", sFolder & "\fileNames"
 
