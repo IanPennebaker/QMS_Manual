@@ -4,12 +4,18 @@ sFolder = oFSO.GetAbsolutePathName(".")
 gFolder = "C:\Users\Ian\Google Drive"
 
 if oFSO.FolderExists(sFolder & "\fileNames") then
-	Wscript.Echo sFolder & "\fileNames exists."
 else 
-	Wscript.Echo sFolder & "\fileNames does not exist."
-	Wscript.Echo "Attempting to create folder."
-	Set oFolder = objFSO.CreateFolder(sFolder & "\fileNames")
-	Wscript.Echo "Success."
+	Set oFolder = oFSO.CreateFolder(sFolder & "\fileNames")
+end if
+
+if oFSO.FolderExists(sFolder & "\fileChangeLog") then
+else 
+	Set oFolder = oFSO.CreateFolder(sFolder & "\fileChangeLog")
+end if
+
+if oFSO.FolderExists(gFolder & "\fileChangeLog") then
+else 
+	Set oFolder = oFSO.CreateFolder(gFolder & "\fileChangeLog")
 end if
 
 oFSO.copyFile gFolder & "\QMS File Names\*", sFolder & "\fileNames"
