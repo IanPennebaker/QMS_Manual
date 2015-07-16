@@ -3,20 +3,20 @@ Set oFSO = CreateObject("Scripting.FileSystemObject")
 sFolder = oFSO.GetAbsolutePathName(".")
 gFolder = "C:\Users\Ian\Google Drive"
 
-'if oFSO.FolderExists(sFolder & "\fileNames") then
-'else 
-'	Set oFolder = oFSO.CreateFolder(sFolder & "\fileNames")
-'end if
+if oFSO.FolderExists(sFolder & "\fileNames") then
+else 
+	Set oFolder = oFSO.CreateFolder(sFolder & "\fileNames")
+end if
 
-'if oFSO.FolderExists(sFolder & "\fileChangeLog") then
-'else 
-'	Set oFolder = oFSO.CreateFolder(sFolder & "\fileChangeLog")
-'end if
+if oFSO.FolderExists(sFolder & "\fileChangeLog") then
+else 
+	Set oFolder = oFSO.CreateFolder(sFolder & "\fileChangeLog")
+end if
 
-'if oFSO.FolderExists(gFolder & "\fileChangeLog") then
-'else 
-'	Set oFolder = oFSO.CreateFolder(gFolder & "\fileChangeLog")
-'end if
+if oFSO.FolderExists(gFolder & "\fileChangeLog") then
+else 
+	Set oFolder = oFSO.CreateFolder(gFolder & "\fileChangeLog")
+end if
 
 oFSO.copyFile gFolder & "\QMS File Names\*", sFolder & "\fileNames"
 
@@ -110,7 +110,7 @@ Wscript.sleep 5000
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 For Each oFile In oFSO.GetFolder(sFolder & "\fileNames").Files
 	if (oFile.Name = "ECMWC.pdf") then
-		oFSO.copyFile sFolder & "\Filenames\ECMWC.pdf", gFolder, true
+		oFSO.copyFile sFolder & "\FileNames\ECMWC.pdf", gFolder & "\", true
 		oFSO.deleteFile oFile
 	else
 		i = 0
