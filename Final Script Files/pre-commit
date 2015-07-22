@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# 
+echo "Script Running"
+cd 'C:/Users/Ian/desktop/QMS_Manual'
+cscript RevisionDate.vbs
+

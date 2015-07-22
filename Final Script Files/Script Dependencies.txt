@@ -1,0 +1,6 @@
+QMS Script needs the following to run:
+1.) PDFTK Installed.
+2.) Github Repository linked to working directory of the script.
+3.) Folders named 'fileNames' and 'fileChangeLog' in working directory of script. If the folders do not exist they will be created when the script is first ran.
+4.) On line 4 of RevisionDate.vbs have a valid path to a Google Drive folder. 
+5.) In the Google Drive folder, make sure there is a folder named fileChangeLog. If the folder does not exist it will be created when the script is first ran.
