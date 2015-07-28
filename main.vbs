@@ -107,7 +107,6 @@ objShell.Run sFolder & "\pdftk.cmd"
 Wscript.sleep 5000
 
 'Delete left over PDFs
-Set oFSO = CreateObject("Scripting.FileSystemObject")
 For Each oFile In oFSO.GetFolder(sFolder & "\fileNames").Files
 	if (oFile.Name = "ECMWC.pdf") then
 		oFSO.copyFile sFolder & "\FileNames\ECMWC.pdf", gFolder & "\", true
